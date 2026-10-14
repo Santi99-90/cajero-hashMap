@@ -5,6 +5,7 @@
 package laboratorio_hashmap;
 
 import java.util.HashMap;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,7 +13,7 @@ import java.util.HashMap;
  */
 public class cajero {
     private HashMap<Integer, Integer> cajero_automatico = new HashMap<>();
-    private int[] denominaciones = {10000, 20000, 50000, 100000};
+    public static final int[] denominaciones = {10000, 20000, 50000, 100000};
     public static final int cantidad_inicial = 100;
 
     public cajero() {
@@ -27,7 +28,10 @@ public class cajero {
         if (!cajero_automatico.containsKey(denominacion)) {
             return -1;
         }
-        return cajero_automatico.get(denominacion);
+        else{
+            return cajero_automatico.get(denominacion);
+        }
     }
+    
     
 }//fin de la clase
