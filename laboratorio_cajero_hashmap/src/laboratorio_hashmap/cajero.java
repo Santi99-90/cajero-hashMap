@@ -43,4 +43,44 @@ public class cajero {
         return "";
     }
     
+    public int[] calcular_distribucion(int monto){
+        int[] billetes = new int[4];
+        if (monto == 50000) {
+            billetes[0] = 1;
+            billetes[1] = 2;
+            return billetes;
+        }
+        if (monto >= 100000) {
+            billetes[0] = 1;
+            billetes[1] = 2;
+            billetes[2] = 1;
+            monto = monto - 100000;
+        }
+        for (int i = denominaciones.length-1; i >= 0; i--) {
+            billetes[i] += monto / denominaciones[i];
+            monto = monto % denominaciones[i];
+        }
+        if (monto != 0) {
+            return null;
+        }
+        return billetes;
+    }
+    
+    public boolean hay_suficientes_billetes(int[] billetes){
+        for (int i = 0; i < billetes.length; i++) {
+            if (billetes[i] > obtener_cantidad(denominaciones[i])) {
+                return false;
+            }
+            
+        }
+        
+        return true;
+    }
+    
+    public void descontar_billetes(int[] billetes){
+        for (int i = 0; i < billetes.length; i++) {
+            int quedan = obtener_cantidad(denominaciones[i])- billetes[i];
+            cajero_automatico.put(denominaciones[i], quedan);
+        }
+    }
 }//fin de la clase
